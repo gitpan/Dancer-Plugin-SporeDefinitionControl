@@ -1,0 +1,19 @@
+Changes
+config.yml
+environments/development.yml
+environments/production.yml
+ignore.txt
+lib/Dancer/Plugin/SporeDefinitionControl.pm
+Makefile.PL
+MANIFEST			This list of files
+MANIFEST.SKIP
+README
+t/00-load.t
+t/01-check_spore_definition.t
+t/boilerplate.t
+t/lib/WebService.pm
+t/manifest.t
+t/pod-coverage.t
+t/pod.t
+t/sample_route.yaml
+META.yml                                 Module meta-data (added by MakeMaker)
