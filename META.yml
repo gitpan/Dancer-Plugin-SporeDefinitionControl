@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Dancer-Plugin-SporeDefinitionControl
-version:            0.05
+version:            0.06
 abstract:           ~
 author:
     - Nicolas Oudard <nicolas@oudard.org>
