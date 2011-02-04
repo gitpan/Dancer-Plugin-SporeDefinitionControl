@@ -17,12 +17,11 @@ Dancer Plugin to control validity of route from a Spore configuration file
 
 =head1 VERSION
 
-Version 0.06
+Version 0.07
 
 =cut
 
-our $VERSION = '0.06';
-
+our $VERSION = '0.07';
 
 =head1 SYNOPSIS
 
@@ -94,11 +93,14 @@ Load yaml config file
 
 #Load definition spore file from plugin config
 my $path_to_spore_def = plugin_setting->{'spore_spec_path'};
+my $rh_file = {};
+if ($path_to_spore_def)
+{
 $path_to_spore_def = File::Spec->catfile( setting('appdir') , $path_to_spore_def) unless (File::Spec->file_name_is_absolute($path_to_spore_def));
-my $rh_file = LoadFile($path_to_spore_def);
-
+$rh_file = LoadFile($path_to_spore_def);
+}
 #load validation hash
-my $rh_path_validation = {};
+our $rh_path_validation = {};
 foreach my $method_name (keys(%{$rh_file->{'methods'}}))
 {
   $rh_path_validation->{$rh_file->{'methods'}->{$method_name}->{'method'}}->{$rh_file->{'methods'}->{$method_name}->{'path'}} = 
