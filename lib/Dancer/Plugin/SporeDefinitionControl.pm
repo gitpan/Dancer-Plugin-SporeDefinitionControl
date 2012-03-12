@@ -17,11 +17,11 @@ Dancer Plugin to control validity of route from a Spore configuration file
 
 =head1 VERSION
 
-Version 0.09
+Version 0.10
 
 =cut
 
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 
 =head1 SYNOPSIS
 
@@ -132,7 +132,7 @@ define spore validation to do on entered request
 =cut
 
 register 'check_spore_definition' => sub {
-    before sub {
+    hook before => sub {
         my $req = request;
         my %req_params = params;
         die "method request must be defined" unless (defined( $req->method() ) );
