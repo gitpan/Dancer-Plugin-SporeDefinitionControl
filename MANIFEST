@@ -24,4 +24,5 @@ t/sample_route_no_delete.yaml
 t/sample_route_no_get.yaml
 t/sample_route_no_post.yaml
 t/sample_route_no_put.yaml
-META.yml                                 Module meta-data (added by MakeMaker)
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)
