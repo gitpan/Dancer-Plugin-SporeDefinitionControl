@@ -17,11 +17,11 @@ Dancer Plugin to control validity of route from a Spore configuration file
 
 =head1 VERSION
 
-Version 0.11
+Version 0.12
 
 =cut
 
-our $VERSION = '0.11';
+our $VERSION = '0.12';
 
 =head1 SYNOPSIS
 
@@ -116,12 +116,16 @@ foreach my $method_name (keys(%{$rh_file->{'methods'}}))
     }
 
 
-    push @{$rh_path_validation->{$method}->{$path}},
+    push @{$rh_path_validation->{$method}->{$path}->{params}},
       {
         required_params => $rh_file->{'methods'}->{$method_name}->{'required_params'},
         optional_params => $rh_file->{'methods'}->{$method_name}->{'optional_params'},
       };
+    $rh_path_validation->{$method}->{$path}->{functions}->{$method_name} = 1;
 }
+
+
+
 
 =head1 SUBROUTINES/METHODS
 
@@ -154,7 +158,7 @@ register 'check_spore_definition' => sub {
 
         my $is_ok = 0;
         my $error;
-        foreach my $route_defined (@{$rh_path_validation->{$req->method()}->{$req->{_route_pattern}}})
+        foreach my $route_defined (@{$rh_path_validation->{$req->method()}->{$req->{_route_pattern}}->{params}})
         {
             my $ko;
             my $ra_required_params = $route_defined->{'required_params'};
@@ -189,6 +193,22 @@ register 'check_spore_definition' => sub {
       };
 };
 
+=head2 get_functions_from_request
+
+return the hash of functions available from method and path.
+
+=cut
+
+register 'get_functions_from_request' => sub {
+    my $req = request;
+
+    my $method = $req->method();
+    my $path = $req->{_route_pattern};
+    my $functions = $rh_path_validation->{$method}->{$path}->{functions};
+    return $functions;
+};
+
+# format the error returned
 sub _returned_error
 {
   my $str_error = shift;
